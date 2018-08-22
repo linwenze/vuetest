@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            divElement, off_width,
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 100 * (clientWidth / 1080) + 'px';
+                if (off_width == clientWidth) {
+                    document.body.fontSize = 100 * (clientWidth / 1080) + 'px';
+                } else {
+                    document.body.fontSize = (100 * (clientWidth / 1080)) / (off_width / clientWidth) + "px"
+                }
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+    </script>
+</head>
+
+<body>
+    <div id="appIndex">
+    </div>
+    <script src="./dist/build.js"></script>
+</body>
+
+</html>
